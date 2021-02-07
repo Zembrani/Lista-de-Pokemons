@@ -3,7 +3,8 @@ import { ListGroup } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 export default function ListPokemons({ pokemon }) {
-    // console.log("p = " + pokemon.map( p => (p.url)))
+    // console.log("p = ")
+    // console.log(pokemon)
     
     return (
         <ListGroup style={{ width: '10rem' }}>
