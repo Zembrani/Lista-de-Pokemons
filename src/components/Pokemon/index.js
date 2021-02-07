@@ -5,31 +5,25 @@ import Buttons from '../buttons'
 
 export default function Pokemon(props) {
     const [pokemon, setPokemon] = useState([])
-    const [currentUrl, setUrl] = useState(`https:pokeapi.co/api/v2/pokemon/` + props.match.params.id)
-    console.log("url = ")
-    console.log(props.match)
+    const [currentUrl, setUrl] = useState(props.location.url)
+    const [id, setId] = useState()
 
     /**
      * Efeito para imprimir os resultados pela primeira vez
      */
     useEffect(() => {
         axiosRequest(currentUrl)
-
     }, [currentUrl])
-
 
     /**
      * GoToNextPage e GoToPrevPage são as funções chamadas pelo botões para avaçar ou voltar as páginas
     */
     function GoToNextPage() {
-        setUrl(`https:pokeapi.co/api/v2/pokemon/` + (props.match.params.id + 1 > 1118 ? props.match.params.id + 1 : props.match.params.id))
-        console.log(currentUrl)
-        axiosRequest(currentUrl)
+        setUrl(`https://pokeapi.co/api/v2/pokemon/` + (id+1) + '/')
     }
 
     function GoToPrevPage() {
-        setUrl(`https:pokeapi.co/api/v2/pokemon/` + (props.match.params.id - 1 > 0 ? props.match.params.id - 1 : props.match.params.id))
-        axiosRequest(currentUrl)
+        setUrl(`https://pokeapi.co/api/v2/pokemon/` + (id-1) + '/')
     }
 
     /**
@@ -38,6 +32,7 @@ export default function Pokemon(props) {
     function axiosRequest(currentUrl) {
         axios.get(currentUrl)
             .then(res => {
+                setId(res.data.id)
                 setPokemon(Object.values(res.data.sprites))
             })
             .catch(error => {
@@ -51,7 +46,7 @@ export default function Pokemon(props) {
             <ListGroup style={{ width: '10rem' }}>
                 {imagesList.map(p => (
                     <ListGroup.Item key={p}>
-                        <img src={p}></img>
+                        <img alt={p} src={p}></img>
                     </ListGroup.Item>
                 ))}
             </ListGroup>

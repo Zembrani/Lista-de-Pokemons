@@ -10,7 +10,7 @@ const Pagina404 = () => ( <div> pagina 404 </div>)
             <BrowserRouter>
                 <Switch>
                     <Route path = '/' component = { Home } exact />
-                    <Route path = '/pokemon/:id' component = { Pokemon } url = ':url' exact />
+                    <Route path = '/pokemon/:id' component = { Pokemon } exact />
                     <Route component = { Pagina404 }/>
                 </Switch>
             </BrowserRouter>,
