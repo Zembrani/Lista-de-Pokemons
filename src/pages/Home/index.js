@@ -52,7 +52,7 @@ export default function Home() {
   }
 
   return (
-    <div className="Home" className="mx-auto" style={{marginRight: '200px'}}>
+    <div className="Home" style={{height: '100vh'}}>
       <Header />
       <ListPokemons pokemon={pokemon} />
       <Buttons

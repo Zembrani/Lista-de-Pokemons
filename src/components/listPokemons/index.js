@@ -1,20 +1,31 @@
 import React from 'react'
-import { ListGroup } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 export default function ListPokemons({ pokemon }) {
 
-    const style = {
-        width: '10rem',
-        margin: 'auto',
-        textAlign: 'center'
+    const list = {
+        height: '50px',
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'space-evenly',
+        flex_shrink: '5'
+    }
+
+    const card = {
+        padding: '2px 2px 2px 2px',
+        border: '3px solid silver',
+        margin: '2px 2px 2px 2px',
+        height: '40px'
     }
 
     return (
-        <div className="d-flex justify-content-center" >
-            {pokemon.map(p => (
-                    <div className="p-2 col-example text-left" key={p.name}>{p.name}</div>
-            ))}
+        <div>
+            <ul style={list}>
+                {pokemon.map((value, key) => (
+                        <Link key={key} style={card} to={'/pokemon/'+value.name}>{value.name}</Link>
+                ))}
+            </ul> 
         </div>
     )
 }

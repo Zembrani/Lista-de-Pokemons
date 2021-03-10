@@ -6,7 +6,7 @@ import Header from '../header'
 
 export default function Pokemon(props) {
     const [pokemon, setPokemon] = useState([])
-    const [currentUrl, setUrl] = useState(props.location.url)
+    const [currentUrl, setUrl] = useState('https://pokeapi.co/api/v2/' + props.match.url)
     const [id, setId] = useState()
 
     /**
@@ -41,7 +41,8 @@ export default function Pokemon(props) {
             })
     }
     const imagesList = pokemon.filter(link => typeof link == 'string')
-
+    // console.log(props)
+    // console.log(currentUrl)
     return (
         <>
             <Header/>
