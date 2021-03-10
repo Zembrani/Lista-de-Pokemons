@@ -5,8 +5,12 @@ import Buttons from '../buttons'
 import Header from '../header'
 
 export default function Pokemon(props) {
-    const [pokemon, setPokemon] = useState([])
-    const [currentUrl, setUrl] = useState('https://pokeapi.co/api/v2/' + props.match.url)
+    const pokemonInit = {
+        infos : null,
+        images : null
+    }
+    const [pokemon, setPokemon] = useState(pokemonInit)
+    const [currentUrl, setUrl] = useState('https://pokeapi.co/api/v2' + props.match.url)
     const [id, setId] = useState()
 
     /**
@@ -34,25 +38,44 @@ export default function Pokemon(props) {
         axios.get(currentUrl)
             .then(res => {
                 setId(res.data.id)
-                setPokemon(Object.values(res.data.sprites))
+                setPokemon({info : res.data, images : Object.values(res.data.sprites)})
             })
             .catch(error => {
                 console.log(error)
             })
+        }
+
+    //Verificar o ocorre que chega aqui antes de ser atribuido um valor para o pokemon
+    const imagesList = pokemon.images ? pokemon.images.filter(link => typeof link == 'string') : ['../../img/loading.jpg']
+
+    const list = {
+        height: '50px',
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'space-evenly',
+        flex_shrink: '5'
     }
-    const imagesList = pokemon.filter(link => typeof link == 'string')
-    // console.log(props)
-    // console.log(currentUrl)
+
+    const card = {
+        padding: '2px 2px 2px 2px',
+        border: '3px solid silver',
+        margin: '2px 2px 2px 2px',
+        height: 'auto'
+    }
+
     return (
         <>
             <Header/>
-            <ListGroup style={{ width: '10rem' }}>
+            {/* Mesmo problema aqui, o pokemons ainda não está definido */}
+            <div>Nome : {pokemon.info ? pokemon.info.name : null}</div>
+            <ul style={list}>
                 {imagesList.map(p => (
-                    <ListGroup.Item key={p}>
+                    <div key={p} style={card}>
                         <img alt={p} src={p}></img>
-                    </ListGroup.Item>
+                    </div>
                 ))}
-            </ListGroup>
+            </ul>
             <Buttons
                 GoToNextPage={GoToNextPage}
                 GoToPrevPage={GoToPrevPage}

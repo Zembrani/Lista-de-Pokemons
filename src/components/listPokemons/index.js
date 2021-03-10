@@ -23,7 +23,7 @@ export default function ListPokemons({ pokemon }) {
         <div>
             <ul style={list}>
                 {pokemon.map((value, key) => (
-                        <Link key={key} style={card} to={'/pokemon/'+value.name}>{value.name}</Link>
+                        <Link key={key} style={card} to={'pokemon/'+value.name}>{value.name}</Link>
                 ))}
             </ul> 
         </div>

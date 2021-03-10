@@ -1,6 +1,7 @@
 import React from 'react'
 import { Navbar, Form, FormControl, Button, NavDropdown, Nav } from 'react-bootstrap'
 import Logo from '../../img/pokemonLogo.png'
+import { Link } from 'react-router-dom';
 
 export default function Header() {
 
@@ -10,7 +11,7 @@ export default function Header() {
 
     return (
     <Navbar bg="dark">
-        <Navbar.Brand href="/">
+        <Link to="/">
         <img
             src={Logo}
             width="180"
@@ -18,9 +19,9 @@ export default function Header() {
             className="d-inline-block align-top"
             alt="Go to home"
         />
-        </Navbar.Brand>
+        </Link>
             <Nav className="mr-auto">
-                <Nav.Link href="/">Home</Nav.Link>
+                <Link to="/">Home</Link>
         </Nav>
         <Form inline>
             <FormControl type="text" placeholder="Search" className="mr-sm-2" />
